@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dish Lists</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            width: 60%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .item-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: rgba(232, 232, 232, 0.9);
+            border-radius: 8px;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        a {
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        a.detail-btn {
+            background-color: #F60530;
+            color: white;
+        }
+
+        a.update-btn {
+            background-color: #C5C04B;
+            color: black;
+        }
+
+        a.delete-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        .print-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .print-btn:hover {
+            background-color: #0056b3;
+        }
+
+        
+        @media print {
+            body, html {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+                page-break-inside: avoid;
+            }
+
+            .container {
+                width: 100%; 
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+
+            @page {
+                size: A4; 
+                margin: 0; 
+            }
+
+            
+            .btn-group,
+            .print-btn {
+                display: none;
+            }
+
+            
+            .item-list {
+                padding: 0;
+            }
+            
+            .item {
+                margin-bottom: 0;
+            }
+        }
+
+    </style>
+</head>
+{% load static %}
+<link rel="stylesheet" href="{% static 'img/style.css' %}">
+<body style="background-image:url('{% static 'img7.jpg' %}');background-repeat: no-repeat; background-size: cover;">
+    <center><div class="container">
+        <h1>Dish List</h1>
+        <p>Date: {{ current_date }}</p> <!-- Display current date -->
+
+        <ul class="item-list">
+            {% for i in ITEMLIST %}
+            <li class="item">
+                <h3>{{ forloop.counter }}. {{ i }}</h3> <!-- Adding count for each dish -->
+                <div class="btn-group">
+                    <a href="{{ i.get_detail_url }}" class="detail-btn">Detail</a>
+                    <a href="{{ i.get_update_url }}" class="update-btn">Update</a>
+                    <a href="{{ i.get_delete_url }}" class="delete-btn">Delete</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+       <button type="button" class="print-btn" onclick="window.print()">Print</button>
+
+    </div></center>
+</body>
+</html>

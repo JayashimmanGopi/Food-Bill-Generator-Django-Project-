@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update The Food Entry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px; 
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px; 
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 22px; 
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px; 
+            font-size: 14px; 
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px; 
+            font-size: 14px; 
+            color: white;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        video.background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; 
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .form-field label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                width: 85%;
+            }
+        }
+    </style>
+</head>
+{% load static %}
+<link rel="stylesheet" href="{% static 'img/style.css' %}">
+<body>
+    <video class="background-video" autoplay muted loop>
+        <source src="{% static 'vid1.mp4' %}" type="video/mp4">
+        
+    </video>
+    <div class="container">
+        <h1>Update The Food Entry</h1>
+        <form method="POST">
+           <center> <b> {{ form.as_p }}</center></b>  
+            {% csrf_token %}
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Page </title>
+    <style>
+       
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+            margin: 0; 
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        
+        video.background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; 
+        }
+
+       
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.85); 
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            z-index: 1; 
+        }
+
+        
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+       
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease; 
+            outline: none;
+        }
+
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #1ABC9C;
+            background-color: #f0f9ff;
+            transform: scale(1.02); 
+        }
+
+        
+        #id_dish {
+            border: 2px solid #3498DB; 
+            background-color: #ECF0F1; 
+            font-size: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+        
+        #id_cost {
+            border: 2px solid #2ECC71; 
+            background-color: #FEF9E7; 
+            font-size: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+        
+        #id_dish:hover, #id_cost:hover {
+            border-color: #1ABC9C; 
+        }
+
+        
+        button {
+            padding: 10px;
+            background-color: #E74C3C;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+{% load static %}
+<link rel="stylesheet" href="{% static 'img/style.css' %}">
+<body>
+
+    <!-- Video as background -->
+    <video class="background-video" autoplay muted loop>
+        <source src="{% static 'vid3.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="form-container">
+        <h2>Create a New Food Entry</h2>
+        <form action="" method="POST">
+            <b> {% csrf_token %}
+            <div class="input-container">
+                <input tabindex="1" id="id_dish" name="dish" required placeholder="Enter Dish Name">
+            </div><br>
+            <div class="input-container">
+                <input tabindex="2" id="id_cost" name="cost" required placeholder="Enter Cost">
+            </div>
+            </b>
+            <button type="submit" tabindex="3">SUBMIT</button>
+        </form>
+    </div>
+
+    <script>
+        // Apply focus event for smooth tab transition effect
+        const inputs = document.querySelectorAll('input, button');
+        
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.style.transform = 'scale(1.05)'; // Scale up the focused input
+            });
+            input.addEventListener('blur', () => {
+                input.style.transform = 'scale(1)'; // Revert to normal size when focus is lost
+            });
+        });
+    </script>
+
+</body>
+</html>

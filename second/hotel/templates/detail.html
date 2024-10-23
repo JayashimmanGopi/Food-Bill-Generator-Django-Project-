@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Detail Page</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-size: cover;
+            }
+
+            .container {
+                background-color: rgba(255, 255, 255, 0.9); 
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                width: 90%;
+                max-width: 600px;
+                margin: 20px;
+            }
+
+            h1 {
+                font-size: 35px;
+                text-align: center;
+                color: #333;
+                margin-bottom: 20px;
+            }
+
+            p {
+                font-size: 16px;
+                color: #555;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+
+            a {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #C66435;
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                text-align: center;
+                border-radius: 5px;
+                margin-top: 20px; 
+                transition: background-color 0.3s;
+            }
+
+            a:hover {
+                background-color: #b2562e;
+            }
+
+            @media (max-width: 768px) {
+                .container {
+                    padding: 15px;
+                    width: 85%;
+                }
+            }
+        </style>
+    </head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'img/style.css' %}">
+    <body style="background-image:url('{% static 'img4.jpg' %}'); background-repeat: no-repeat; background-size: cover;">
+        <div class="container">
+            <h1>Detail List</h1>
+            <center>{{ DETAILIST }}</center>
+            <br> <center><a href="{{ DETAILIST.get_home_url }}">Back</a></center>
+        </div>
+    </body>
+</html>
